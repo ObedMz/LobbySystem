@@ -1,0 +1,10 @@
+message:
+  nopermission: "&cNo tienes permisos para ejecutar este comando."
+  lobbytp: "&aHas sido transportado a la lobby correctamente."
+  lobbyerror: "&cNo hay ninguna lobby establecida."
+  lobbycreate: "&aLobby agregada correctamente."
+  lobbyalready: "&cYa estas conectado a este servidor."
+  lobbyremove: "&aLobby eliminada correctamente."
+  lobbyreload: "&aConfiguracion recargada correctamente."
+  lobbywaiting: "&aTeletransportando a la lobby en %time% segundos."
+  lobbycancel: "&cHas cancelado el teleporte."
