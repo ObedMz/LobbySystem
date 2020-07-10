@@ -1,5 +1,5 @@
 # LobbySystem
-LobbySystem es un plugin de la api de bungee, creado para manejar el sistema de lobbys de tu servidor.
+LobbySystem es un plugin de la API de bungee, creado para manejar el sistema de lobbys de tu servidor.
 
 # Instalación
  - git clone https://github.com/ObedMz/LobbySystem.git
