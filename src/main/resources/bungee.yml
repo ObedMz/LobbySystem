@@ -2,4 +2,4 @@ name: Lobbysystem
 version: ${project.version}
 main: obed.me.lobbysystem.Lobbysystem
 description: Lobby plugin Bungee
-author: obed_007
+author: ObedMz
