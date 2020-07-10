@@ -2,8 +2,7 @@
 ## en la lista, recuerda que deben ser los mismos que en el archivo config.yml del Bungee.
 
 config:
-  countdown: true
+  countdown: "true"
   time: 3
   lobbys:
-    - "lobbyname"
-    - "otherlobby"
+    - "lobby"
