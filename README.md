@@ -12,9 +12,6 @@ o descargar el jar compilado haciendo click en [descargar](https://github.com/Ob
 
 
 Despues de compilar el plugin, agregalo a la carpeta /plugins de tu servidor bungee y listo.
-# Requerimientos
- - Maven
- - Java
 
 # Como usarlo
 - Para agregar un servidor como lobby puedes agregarlo desde la config.yml del plugin, o viajando al servidor y escribir el comando "/lobbycreate"
