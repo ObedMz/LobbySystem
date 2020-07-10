@@ -2,9 +2,14 @@
 LobbySystem es un plugin de la API de bungee, creado para manejar el sistema de lobbys de tu servidor.
 
 # Instalación
- - git clone https://github.com/ObedMz/LobbySystem.git
- - cd LobbySystem
- - mvn clean install
+Puedes compilarlo desde la linea de comando usando:
+```bash
+ git clone https://github.com/ObedMz/LobbySystem.git
+ cd LobbySystem
+ mvn clean install
+ ```
+o descargar el jar compilado haciendo click en [descargar](https://github.com/ObedMz/LobbySystem/releases/download/1.0-SNAPSHOT/lobbysystem-1.0-SNAPSHOT.jar/)
+
 
 Despues de compilar el plugin, agregalo a la carpeta /plugins de tu servidor bungee y listo.
 # Requerimientos
