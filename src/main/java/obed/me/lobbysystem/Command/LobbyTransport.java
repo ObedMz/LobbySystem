@@ -23,12 +23,12 @@ public class LobbyTransport extends Command {
                 }
                 ServerInfo target = Lobbysystem.getInstance().getProxy().getServerInfo(args[0]);
                 ServerInfo teleport = Lobbysystem.getInstance().getProxy().getServerInfo(args[1]);
-                if(!Lobbysystem.getLobbys().contains(target)){
-                    pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.transport.error").replaceAll("%server%", target.getName()));
+                if(!Lobbysystem.getLobbys().contains(args[0])){
+                    pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.transport.error").replaceAll("%server%", args[0]));
                     return;
                 }
-                if(!Lobbysystem.getLobbys().contains(teleport)){
-                    pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.transport.error").replaceAll("%server%", teleport.getName()));
+                if(!Lobbysystem.getLobbys().contains(args[1])){
+                    pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.transport.error").replaceAll("%server%", args[1]));
                     return;
                 }
                 for(ProxiedPlayer ppall : target.getPlayers()){

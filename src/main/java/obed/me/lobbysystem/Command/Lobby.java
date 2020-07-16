@@ -41,23 +41,12 @@ public class Lobby extends Command {
                     if(lbp.isWaiting()){
                         pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.cancel"));
                         lbp.setWaiting(false);
-                        task.cancel();
+                        lbp.getTask().cancel();
                         return;
                     }
                     lbp.setWaiting(true);
                     pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.waiting").replaceAll("%time%", Integer.toString(Lobbysystem.getInstance().time)));
-                    task = Lobbysystem.getInstance().getProxy().getScheduler().schedule((Plugin) Lobbysystem.getInstance(), () ->{
-                        if(time >= Lobbysystem.getInstance().time){
-                            pp.connect(sv);
-                            lbp.setWaiting(false);
-                            pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.tp"));
-                            time = 0;
-                            task.cancel();
-                        }
-                        //Debuggin
-                        pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.waiting").replaceAll("%time%", Integer.toString(time)));
-                        time++;
-                    },0,1, TimeUnit.SECONDS);
+                    lbp.transportWithRunnable(sv);
                     return;
                 }
                 pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.already"));

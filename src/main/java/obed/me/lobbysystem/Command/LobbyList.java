@@ -26,9 +26,6 @@ public class LobbyList extends Command {
                 }
                 pp.sendMessage(ChatColor.translateAlternateColorCodes('&', Lobbysystem.getInstance().getMessage("message.lobby.list.footer")));
 
-
-                Lobbysystem.getInstance().saveLobbysinConfig();
-                pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.create"));
             } else {
                 pp.sendMessage(Lobbysystem.getInstance().getMessage("message.nopermission"));
             }
