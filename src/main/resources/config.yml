@@ -5,7 +5,6 @@ config:
   countdown: "true"
   time: "3"
   lobbys:
-    - "lobby"
   commands:
     lobby:
       command: "lobby"

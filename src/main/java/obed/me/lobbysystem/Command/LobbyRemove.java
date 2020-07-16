@@ -21,7 +21,7 @@ public class LobbyRemove extends Command {
                 return;
             }
             if(args.length <=0){
-                pp.sendMessage(Lobbysystem.getInstance().getMessage("message.remove.arguments"));
+                pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.remove.arguments"));
                 return;
             }
             ServerInfo sv = Lobbysystem.getInstance().getProxy().getServerInfo(args[0]);

@@ -35,6 +35,8 @@ public final class Lobbysystem extends Plugin {
         runnable = Boolean.parseBoolean(config.getConfig().getString("config.countdown"));
         time = Integer.parseInt(config.getConfig().getString("config.time"));
         loadCommands();
+        getProxy().getConsole().sendMessage(ChatColor.GREEN + "[Lobby System] loaded correctly.");
+        getProxy().getConsole().sendMessage(ChatColor.GREEN + "[Lobby System]" + getLobbys().size()+ " lobbys has been added.");
     }
     public void loadLobbysfromConfig(){
         Globbys.clear();
@@ -89,9 +91,9 @@ public final class Lobbysystem extends Plugin {
     private void loadCommands(){
 
         try {
-            String name = config.getConfig().getString("config.command.lobby.command");
-            String permission = config.getConfig().getString("config.command.lobby.permission");
-            String[] aliases = config.getConfig().getStringList("config.command.lobby.aliases").toArray(new String[0]);
+            String name = config.getConfig().getString("config.commands.lobby.command");
+            String permission = config.getConfig().getString("config.commands.lobby.permission");
+            String[] aliases = config.getConfig().getStringList("config.commands.lobby.aliases").toArray(new String[0]);
             ProxyServer.getInstance().getPluginManager().registerCommand(this, new Lobby(name,permission, aliases));
             ProxyServer.getInstance().getPluginManager().registerCommand(this, new LobbyCreate("lobbycreate", "lobby.create"));
             ProxyServer.getInstance().getPluginManager().registerCommand(this, new LobbyList("lobbylist", "lobby.list"));
