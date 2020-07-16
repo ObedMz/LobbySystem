@@ -23,14 +23,15 @@ public final class Lobbysystem extends Plugin {
     public int time;
     private boolean runnable;
     private static List<String> Globbys = new ArrayList<String>();
+    private static List<String> Rlobbys = new ArrayList<String>();
+
     @Override
     public void onEnable() {
       instance = this;
-      config = new ConfigManager();
-      config.registerConfig();
-      config.registerMessage();
+      loadConfig();
       loadDirectory();
         //loading lobbies
+        loadDeniedServers();
         loadLobbysfromConfig();
         runnable = Boolean.parseBoolean(config.getConfig().getString("config.countdown"));
         time = Integer.parseInt(config.getConfig().getString("config.time"));
@@ -38,6 +39,23 @@ public final class Lobbysystem extends Plugin {
         getProxy().getConsole().sendMessage(ChatColor.GREEN + "[Lobby System] loaded correctly.");
         getProxy().getConsole().sendMessage(ChatColor.GREEN + "[Lobby System]" + getLobbys().size()+ " lobbys has been added.");
     }
+
+    public void loadConfig() {
+        config = new ConfigManager();
+        config.registerConfig();
+        config.registerMessage();
+    }
+
+    public void loadDeniedServers(){
+        Rlobbys.clear();
+        List<String> lobbys = config.getConfig().getStringList("config.commands.lobby.denied_servers");
+        for(String servers : lobbys){
+            if(Lobbysystem.getInstance().getProxy().getServers().containsKey(servers)){
+                Rlobbys.add(servers);
+            }
+        }
+    }
+
     public void loadLobbysfromConfig(){
         Globbys.clear();
         List<String> lobbys = config.getConfig().getStringList("config.lobbys");
@@ -60,7 +78,7 @@ public final class Lobbysystem extends Plugin {
 
     }
 
-    public void saveMessage(){
+    private void saveMessage(){
         File file = new File(getDataFolder(), "message.yml");
         try {
             Configuration cgf = cp.load(file);
@@ -70,10 +88,25 @@ public final class Lobbysystem extends Plugin {
             e.printStackTrace();
         }
     }
+    private void saveConfig(){
+        File file = new File(getDataFolder(), "config.yml");
+        try {
+            Configuration cgf = cp.load(file);
+            ConfigurationProvider.getProvider(YamlConfiguration.class).save(cgf, new File(getDataFolder(), "config.yml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void reloadConfig(){
+        saveConfig();
+        saveMessage();
         config.reloadConfig();
+        config.reloadMessage();
         loadLobbysfromConfig();
+        loadDeniedServers();
+        runnable = Boolean.parseBoolean(config.getConfig().getString("config.countdown"));
+        time = Integer.parseInt(config.getConfig().getString("config.time"));
     }
 
     public static ServerInfo getRandomLobby(){
@@ -85,9 +118,13 @@ public final class Lobbysystem extends Plugin {
             return getInstance().getProxy().getServerInfo(Globbys.get(ran));
         }
     }
-    public static List<String> getLobbys(){
+    public List<String> getLobbys(){
         return Globbys;
     }
+    public List<String> getRlobbys() {
+        return Rlobbys;
+    }
+
     private void loadCommands(){
 
         try {
@@ -108,7 +145,7 @@ public final class Lobbysystem extends Plugin {
 
     }
     public String getMessage(String path){
-       return ChatColor.translateAlternateColorCodes('&', config.getMessage().getString(path));
+       return ChatColor.translateAlternateColorCodes('&', config.getMessage().getString("message.prefix") + config.getMessage().getString(path));
     }
 
     private void loadDirectory() {

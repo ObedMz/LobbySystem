@@ -1,11 +1,14 @@
 message:
   nopermission: "&cNo tienes permisos para ejecutar este comando."
+  prefix: "&6[Lobby] "
   lobby:
+    denied: "&cNo puedes usar este comando aqui."
     tp: "&aHas sido transportado a la lobby correctamente."
     error: "&cNo hay ninguna lobby establecida."
     create: "&aLobby agregada correctamente."
     islobby: "&cEste servidor ya esta establecido como lobby"
     already: "&cYa estas conectado a este servidor."
+    reload: "&aConfiguracion recargada correctamente"
     remove:
       message: " &aLobby eliminada correctamente."
       arguments: "&cFaltan argumentos, usa /lobbyremove <lobby>"
@@ -14,6 +17,7 @@ message:
     cancel: "&cHas cancelado el teleporte."
     transport:
       sucess: "&a%target_amount% jugadores de %target% fueron transportados a %objetive%"
+      equals: "&cLos servidores no pueden ser iguales"
       error: "&cEl servidor %server% no esta establecido como lobby."
       arguments: "&cUsa /lobbytransport <server> <server>"
     list:

@@ -12,3 +12,4 @@ config:
       aliases:
         - "hub"
         - "leave"
+      denied_servers:

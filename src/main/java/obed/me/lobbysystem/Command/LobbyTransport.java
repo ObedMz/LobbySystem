@@ -1,6 +1,5 @@
 package obed.me.lobbysystem.Command;
 
-import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
@@ -23,12 +22,17 @@ public class LobbyTransport extends Command {
                 }
                 ServerInfo target = Lobbysystem.getInstance().getProxy().getServerInfo(args[0]);
                 ServerInfo teleport = Lobbysystem.getInstance().getProxy().getServerInfo(args[1]);
-                if(!Lobbysystem.getLobbys().contains(args[0])){
+                if(!Lobbysystem.getInstance().getLobbys().contains(args[0])){
                     pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.transport.error").replaceAll("%server%", args[0]));
                     return;
                 }
-                if(!Lobbysystem.getLobbys().contains(args[1])){
+                if(!Lobbysystem.getInstance().getLobbys().contains(args[1])){
                     pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.transport.error").replaceAll("%server%", args[1]));
+                    return;
+                }
+
+                if(args[0].equals(args[1])){
+                    pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.transport.equals"));
                     return;
                 }
                 for(ProxiedPlayer ppall : target.getPlayers()){

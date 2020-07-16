@@ -25,8 +25,8 @@ public class LobbyRemove extends Command {
                 return;
             }
             ServerInfo sv = Lobbysystem.getInstance().getProxy().getServerInfo(args[0]);
-            if(Lobbysystem.getLobbys().contains(sv.getName())){
-                Lobbysystem.getLobbys().remove(sv.getName());
+            if(Lobbysystem.getInstance().getLobbys().contains(sv.getName())){
+                Lobbysystem.getInstance().getLobbys().remove(sv.getName());
                 Lobbysystem.getInstance().saveLobbysinConfig();
                 pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.remove.message"));
             }else{

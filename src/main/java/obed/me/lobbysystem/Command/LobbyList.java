@@ -18,7 +18,7 @@ public class LobbyList extends Command {
             ProxiedPlayer pp = (ProxiedPlayer) sender;
             if(pp.hasPermission(this.getPermission())){
                 pp.sendMessage(ChatColor.translateAlternateColorCodes('&', Lobbysystem.getInstance().getMessage("message.lobby.list.header")));
-                for(String sv : Lobbysystem.getLobbys()){
+                for(String sv : Lobbysystem.getInstance().getLobbys()){
                     ServerInfo svi = Lobbysystem.getInstance().getProxy().getServerInfo(sv);
                     int amount = svi.getPlayers().size();
                     pp.sendMessage(ChatColor.translateAlternateColorCodes('&', Lobbysystem.getInstance().getMessage("message.lobby.list.message")

@@ -4,20 +4,16 @@ import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
-import net.md_5.bungee.api.plugin.Plugin;
-import net.md_5.bungee.api.scheduler.ScheduledTask;
 import obed.me.lobbysystem.LobbyPlayer;
 import obed.me.lobbysystem.Lobbysystem;
 
-import java.util.concurrent.TimeUnit;
 
 
 public class Lobby extends Command {
     public Lobby(String name, String permission, String[] aliases) {
         super(name, permission, aliases);
     }
-    private ScheduledTask task;
-    private Integer time = 0;
+
     @Override
     public void execute(CommandSender sender, String[] args) {
         if(sender instanceof ProxiedPlayer){
@@ -26,6 +22,11 @@ public class Lobby extends Command {
                 pp.sendMessage(Lobbysystem.getInstance().getMessage("message.nopermission"));
                 return;
             }
+            if(Lobbysystem.getInstance().getRlobbys().contains(pp.getServer().getInfo().getName())){
+                pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.denied"));
+                return;
+            }
+
             ServerInfo sv = Lobbysystem.getRandomLobby();
             if(sv == null) {
                 pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.error"));

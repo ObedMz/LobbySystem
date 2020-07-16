@@ -18,11 +18,11 @@ public class LobbyCreate extends Command {
             ProxiedPlayer pp = (ProxiedPlayer) sender;
             if(pp.hasPermission(this.getPermission())){
                 ServerInfo sv = pp.getServer().getInfo();
-                if(Lobbysystem.getLobbys().contains(sv.getName())){
+                if(Lobbysystem.getInstance().getLobbys().contains(sv.getName())){
                     pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.islobby"));
                     return;
                 }
-                Lobbysystem.getLobbys().add(sv.getName());
+                Lobbysystem.getInstance().getLobbys().add(sv.getName());
                 Lobbysystem.getInstance().saveLobbysinConfig();
                 pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.create"));
             } else {

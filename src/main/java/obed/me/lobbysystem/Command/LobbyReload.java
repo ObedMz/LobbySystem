@@ -1,6 +1,5 @@
 package obed.me.lobbysystem.Command;
 
-import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
@@ -17,8 +16,8 @@ public class LobbyReload extends Command {
             ProxiedPlayer pp = (ProxiedPlayer) sender;
             if(pp.hasPermission(this.getPermission())){
                 Lobbysystem.getInstance().reloadConfig();
-                Lobbysystem.getInstance().saveMessage();
-                pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobbyreload"));
+
+                pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.reload"));
             } else{
                 pp.sendMessage(Lobbysystem.getInstance().getMessage("message.nopermission"));
             }
