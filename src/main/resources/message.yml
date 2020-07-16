@@ -1,10 +1,22 @@
 message:
   nopermission: "&cNo tienes permisos para ejecutar este comando."
-  lobbytp: "&aHas sido transportado a la lobby correctamente."
-  lobbyerror: "&cNo hay ninguna lobby establecida."
-  lobbycreate: "&aLobby agregada correctamente."
-  lobbyalready: "&cYa estas conectado a este servidor."
-  lobbyremove: "&aLobby eliminada correctamente."
-  lobbyreload: "&aConfiguracion recargada correctamente."
-  lobbywaiting: "&aTeletransportando a la lobby en %time% segundos."
-  lobbycancel: "&cHas cancelado el teleporte."
+  lobby:
+    tp: "&aHas sido transportado a la lobby correctamente."
+    error: "&cNo hay ninguna lobby establecida."
+    create: "&aLobby agregada correctamente."
+    islobby: "&cEste servidor ya esta establecido como lobby"
+    already: "&cYa estas conectado a este servidor."
+    remove:
+      message: " &aLobby eliminada correctamente."
+      arguments: "&cFaltan argumentos, usa /lobbyremove <lobby>"
+      error: "&cEse servidor no existe o no es una lobby"
+    waiting: "&aTeletransportando a la lobby en %time% segundos."
+    cancel: "&cHas cancelado el teleporte."
+    transport:
+      sucess: "&a%target_amount% jugadores de %target% fueron transportados a %objetive%"
+      error: "&cEl servidor %server% no esta establecido como lobby."
+      arguments: "&cUsa /lobbytransport <server> <server>"
+    list:
+      header: "&6&m==================="
+      message: "&6%lobby%  - %amount% players"
+      footer: "&6====================="

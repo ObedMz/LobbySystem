@@ -6,64 +6,61 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.api.scheduler.ScheduledTask;
-import net.md_5.bungee.api.scheduler.TaskScheduler;
-import obed.me.lobbysystem.ConfigManager.ConfigManager;
 import obed.me.lobbysystem.LobbyPlayer;
 import obed.me.lobbysystem.Lobbysystem;
-import sun.security.krb5.Config;
 
 import java.util.concurrent.TimeUnit;
 
 
 public class Lobby extends Command {
-    public Lobby(String name) {
-        super(name, "lobby.use", "lobby", "hub", "salir", "leave");
+    public Lobby(String name, String permission, String[] aliases) {
+        super(name, permission, aliases);
     }
     private ScheduledTask task;
-    private ConfigManager config;
     private Integer time = 0;
     @Override
     public void execute(CommandSender sender, String[] args) {
-        config = new ConfigManager();
         if(sender instanceof ProxiedPlayer){
             ProxiedPlayer pp = (ProxiedPlayer) sender;
-            if(!pp.hasPermission("lobby.use")){
+            if(!pp.hasPermission(this.getPermission())){
                 pp.sendMessage(Lobbysystem.getInstance().getMessage("message.nopermission"));
                 return;
             }
             ServerInfo sv = Lobbysystem.getRandomLobby();
-            if(sv != null){
-                if(pp.getServer().getInfo() != sv){
-                    if(!Lobbysystem.getInstance().runnable){
+            if(sv == null) {
+                pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.error"));
+                return;
+            }
+            if(pp.getServer().getInfo() != sv){
+                    if(!Lobbysystem.getInstance().isRunnable()){
                         pp.connect(sv);
-                        pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobbytp"));
+                        pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.tp"));
                         return;
                     }
                     LobbyPlayer lbp = LobbyPlayer.getLobbyPlayer(pp);
                     if(lbp.isWaiting()){
-                        pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobbycancel"));
+                        pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.cancel"));
                         lbp.setWaiting(false);
                         task.cancel();
                         return;
                     }
                     lbp.setWaiting(true);
-                    pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobbywaiting").replaceAll("%time%", Integer.toString(Lobbysystem.getInstance().time)));
+                    pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.waiting").replaceAll("%time%", Integer.toString(Lobbysystem.getInstance().time)));
                     task = Lobbysystem.getInstance().getProxy().getScheduler().schedule((Plugin) Lobbysystem.getInstance(), () ->{
                         if(time >= Lobbysystem.getInstance().time){
                             pp.connect(sv);
                             lbp.setWaiting(false);
-                            pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobbytp"));
+                            pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.tp"));
                             time = 0;
                             task.cancel();
                         }
+                        //Debuggin
+                        pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.waiting").replaceAll("%time%", Integer.toString(time)));
                         time++;
                     },0,1, TimeUnit.SECONDS);
                     return;
                 }
-                pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobbyalready"));
-            }else{
-                pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobbyerror"));
-            }
+                pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.already"));
 
 
         }

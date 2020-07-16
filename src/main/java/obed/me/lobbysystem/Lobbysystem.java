@@ -7,10 +7,7 @@ import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
-import obed.me.lobbysystem.Command.LobbyCreate;
-import obed.me.lobbysystem.Command.Lobby;
-import obed.me.lobbysystem.Command.LobbyReload;
-import obed.me.lobbysystem.Command.LobbyRemove;
+import obed.me.lobbysystem.Command.*;
 import obed.me.lobbysystem.ConfigManager.ConfigManager;
 
 import java.io.File;
@@ -20,12 +17,12 @@ import java.util.List;
 import java.util.Random;
 
 public final class Lobbysystem extends Plugin {
-    public static ConfigurationProvider cp = ConfigurationProvider.getProvider(YamlConfiguration.class);
+    private ConfigurationProvider cp = ConfigurationProvider.getProvider(YamlConfiguration.class);
     private ConfigManager config;
     private static Lobbysystem instance;
     public int time;
-    public boolean runnable;
-    public static List<String> lobbys = new ArrayList<String>();
+    private boolean runnable;
+    private static List<String> Globbys = new ArrayList<String>();
     @Override
     public void onEnable() {
       instance = this;
@@ -40,11 +37,11 @@ public final class Lobbysystem extends Plugin {
         loadCommands();
     }
     public void loadLobbysfromConfig(){
-        lobbys.clear();
+        Globbys.clear();
         List<String> lobbys = config.getConfig().getStringList("config.lobbys");
         for(String servers : lobbys){
             if(Lobbysystem.getInstance().getProxy().getServers().containsKey(servers)){
-                this.lobbys.add(servers);
+                Globbys.add(servers);
             }
         }
     }
@@ -52,7 +49,7 @@ public final class Lobbysystem extends Plugin {
         File file = new File(getDataFolder(), "config.yml");
         try {
             Configuration cgf = cp.load(file);
-            cgf.set("config.lobbys", lobbys);
+            cgf.set("config.lobbys", Globbys);
             ConfigurationProvider.getProvider(YamlConfiguration.class).save(cgf, new File(getDataFolder(), "config.yml"));
 
         } catch (IOException e) {
@@ -79,18 +76,34 @@ public final class Lobbysystem extends Plugin {
 
     public static ServerInfo getRandomLobby(){
         Random random = new Random();
-        if(lobbys.size() <=0){
+        if(Globbys.size() <=0){
             return null;
         }else{
-            int ran = random.nextInt(lobbys.size());
-            return getInstance().getProxy().getServerInfo(lobbys.get(ran));
+            int ran = random.nextInt(Globbys.size());
+            return getInstance().getProxy().getServerInfo(Globbys.get(ran));
         }
     }
+    public static List<String> getLobbys(){
+        return Globbys;
+    }
     private void loadCommands(){
-        ProxyServer.getInstance().getPluginManager().registerCommand(this, new LobbyCreate("lobbycreate"));
-        ProxyServer.getInstance().getPluginManager().registerCommand(this, new Lobby("lobby"));
-        ProxyServer.getInstance().getPluginManager().registerCommand(this, new LobbyReload("lobbyreload"));
-        ProxyServer.getInstance().getPluginManager().registerCommand(this, new LobbyRemove("lobbyremove"));
+
+        try {
+            String name = config.getConfig().getString("config.command.lobby.command");
+            String permission = config.getConfig().getString("config.command.lobby.permission");
+            String[] aliases = config.getConfig().getStringList("config.command.lobby.aliases").toArray(new String[0]);
+            ProxyServer.getInstance().getPluginManager().registerCommand(this, new Lobby(name,permission, aliases));
+            ProxyServer.getInstance().getPluginManager().registerCommand(this, new LobbyCreate("lobbycreate", "lobby.create"));
+            ProxyServer.getInstance().getPluginManager().registerCommand(this, new LobbyList("lobbylist", "lobby.list"));
+            ProxyServer.getInstance().getPluginManager().registerCommand(this, new LobbyTransport("lobbylist", "lobby.transport"));
+            ProxyServer.getInstance().getPluginManager().registerCommand(this, new LobbyReload("lobbyreload", "lobby.reload"));
+            ProxyServer.getInstance().getPluginManager().registerCommand(this, new LobbyRemove("lobbyremove", "lobby.remove"));
+        }catch (Exception e){
+            e.printStackTrace();
+            getProxy().getConsole().sendMessage(ChatColor.RED + "An error has ocurred loading commands from config.yml, fixed it");
+            getProxy().stop();
+        }
+
     }
     public String getMessage(String path){
        return ChatColor.translateAlternateColorCodes('&', config.getMessage().getString(path));
@@ -107,4 +120,11 @@ public final class Lobbysystem extends Plugin {
         return instance;
     }
 
+    public boolean isRunnable() {
+        return runnable;
+    }
+
+    public void setRunnable(boolean runnable) {
+        this.runnable = runnable;
+    }
 }
