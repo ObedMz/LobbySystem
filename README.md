@@ -1,9 +1,9 @@
 <h1> Lobby System </h1>
 LobbySystem es un plugin de la API de bungee creado para manejar el sistema de lobbys de tu network.
 
-# Short Wiki
+## Short Wiki
 
-## Instalación
+### Instalación
 Puedes compilarlo desde la linea de comando usando:
 ```bash
  git clone https://github.com/ObedMz/LobbySystem.git
@@ -15,7 +15,7 @@ o descargar la ultima version del .jar haciendo click en [descargar](https://git
 
 
 
-## Como usarlo
+### Como usarlo
 - Para agregar un servidor como lobby puedes agregarlo desde la config.yml del plugin, o viajando al servidor y escribir el comando "/lobbycreate"
 - Para eliminar el servidor de la lista de lobbys puedes usar el comando "/lobbyremove (server)"
   tambien puedes hacerlo borrando el nombre desde la "config.yml" y en el server /lobbyreload" 
@@ -24,7 +24,7 @@ o descargar la ultima version del .jar haciendo click en [descargar](https://git
 
 Ver la [wiki](https://github.com/ObedMz/LobbySystem/wiki) para más información.
 
-## Permissions
+### Permissions
  - "lobby.create"
  - "lobby.remove"
  - "lobby.reload"
@@ -32,7 +32,7 @@ Ver la [wiki](https://github.com/ObedMz/LobbySystem/wiki) para más información
  - "lobby.transport"
  - "lobby.use" (editable)
  
- ## Comandos
+ ### Comandos
  - /lobbycreate
  - /lobbyremove <server>
  - /lobby (editable)
