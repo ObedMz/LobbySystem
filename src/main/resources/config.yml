@@ -12,8 +12,4 @@ config:
       aliases:
         - "hub"
         - "leave"
-<<<<<<< HEAD
       denied_servers:
-=======
-      denied_servers:
->>>>>>> 748888d96e61c96841c703bafcc436b3cb3b2e52

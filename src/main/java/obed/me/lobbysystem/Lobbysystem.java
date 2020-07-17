@@ -9,6 +9,7 @@ import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
 import obed.me.lobbysystem.Command.*;
 import obed.me.lobbysystem.ConfigManager.ConfigManager;
+import obed.me.lobbysystem.Events.Event;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,6 +29,7 @@ public final class Lobbysystem extends Plugin {
     @Override
     public void onEnable() {
       instance = this;
+      getProxy().registerChannel("BungeeCord");
       loadConfig();
       loadDirectory();
         //loading lobbies
@@ -36,8 +38,9 @@ public final class Lobbysystem extends Plugin {
         runnable = Boolean.parseBoolean(config.getConfig().getString("config.countdown"));
         time = Integer.parseInt(config.getConfig().getString("config.time"));
         loadCommands();
+        getProxy().getPluginManager().registerListener(this, new Event());
         getProxy().getConsole().sendMessage(ChatColor.GREEN + "[Lobby System] loaded correctly.");
-        getProxy().getConsole().sendMessage(ChatColor.GREEN + "[Lobby System]" + getLobbys().size()+ " lobbys has been added.");
+        getProxy().getConsole().sendMessage(ChatColor.GREEN + "[Lobby System] " + getLobbys().size()+ " lobbys has been added.");
     }
 
     public void loadConfig() {
