@@ -1,5 +1,5 @@
 <h1> Lobby System </h1>
-n
+***
 LobbySystem es un plugin de la API de bungee creado para manejar el sistema de lobbys de tu network.
 
 # Short Wiki
