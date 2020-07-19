@@ -20,7 +20,7 @@ public class LobbyTP extends Command {
                     return;
                 }
                 ProxiedPlayer target = Lobbysystem.getInstance().getProxy().getPlayer(args[0]);
-                if(!target.isConnected()){
+                if(target == null){
                     pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.teleport.error"));
                     return;
                 }
@@ -29,7 +29,7 @@ public class LobbyTP extends Command {
                 }else {
                     target.connect(Lobbysystem.getRandomLobby());
                 }
-                pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.teleport.sender")
+                pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.teleport.sucess")
                 .replaceAll("%player%" , target.getName())
                 .replaceAll("%server%",target.getServer().getInfo().getName()));
                 target.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.teleport.player"));

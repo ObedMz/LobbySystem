@@ -21,6 +21,10 @@ public class LobbyServer extends Command {
                     return;
                 }
                 ServerInfo sv = Lobbysystem.getInstance().getProxy().getServerInfo(args[0]);
+                if(sv == null){
+                    pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.server.error"));
+                    return;
+                }
                 if(Lobbysystem.getInstance().getLobbys().contains(sv.getName())){
                    pp.connect(sv);
                    pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.server.sucess"));
