@@ -35,7 +35,6 @@ public class LobbyTP extends Command {
                 .replaceAll("%player%" , target.getName())
                 .replaceAll("%server%", nsv.getName()));
                 target.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.teleport.player"));
-
                 return;
             }
             pp.sendMessage(Lobbysystem.getInstance().getMessage("message.nopermission"));

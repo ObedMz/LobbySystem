@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public final class Lobbysystem extends Plugin {
     private ConfigurationProvider cp = ConfigurationProvider.getProvider(YamlConfiguration.class);
@@ -25,7 +27,7 @@ public final class Lobbysystem extends Plugin {
     private boolean runnable;
     private static List<String> Globbys = new ArrayList<String>();
     private static List<String> Rlobbys = new ArrayList<String>();
-
+    private final Pattern pattern = Pattern.compile("#[a-fA-F0-9]{6}");
     @Override
     public void onEnable() {
       instance = this;
@@ -151,7 +153,16 @@ public final class Lobbysystem extends Plugin {
 
     }
     public String getMessage(String path){
-       return ChatColor.translateAlternateColorCodes('&', config.getMessage().getString("message.prefix") + config.getMessage().getString(path));
+        String message = config.getMessage().getString("message.prefix") + config.getMessage().getString(path);
+        if(getProxy().getVersion().contains("1.16")){
+            Matcher match = pattern.matcher(message);
+            while(match.find()){
+                String color = message.substring(match.start(), match.end());
+                message = message.replace(color, ChatColor.of(color) + "");
+                match = pattern.matcher(message);
+            }
+        }
+       return ChatColor.translateAlternateColorCodes('&', message);
     }
 
     private void loadDirectory() {
