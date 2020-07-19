@@ -140,6 +140,9 @@ public final class Lobbysystem extends Plugin {
             ProxyServer.getInstance().getPluginManager().registerCommand(this, new LobbyTransport("lobbytransport", "lobby.transport"));
             ProxyServer.getInstance().getPluginManager().registerCommand(this, new LobbyReload("lobbyreload", "lobby.reload"));
             ProxyServer.getInstance().getPluginManager().registerCommand(this, new LobbyRemove("lobbyremove", "lobby.remove"));
+            ProxyServer.getInstance().getPluginManager().registerCommand(this, new LobbyServer("lobbyserver", "lobby.server"));
+            ProxyServer.getInstance().getPluginManager().registerCommand(this, new LobbyTP("lobbytp", "lobby.tp"));
+
         }catch (Exception e){
             e.printStackTrace();
             getProxy().getConsole().sendMessage(ChatColor.RED + "An error has ocurred loading commands from config.yml, fixed it");
