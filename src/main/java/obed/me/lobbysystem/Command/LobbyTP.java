@@ -1,6 +1,7 @@
 package obed.me.lobbysystem.Command;
 
 import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 import obed.me.lobbysystem.Lobbysystem;
@@ -24,14 +25,15 @@ public class LobbyTP extends Command {
                     pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.teleport.error"));
                     return;
                 }
+                ServerInfo nsv = Lobbysystem.getRandomLobby();
                 if(Lobbysystem.getInstance().getLobbys().contains(pp.getServer().getInfo().getName())){
                     target.connect(pp.getServer().getInfo());
                 }else {
-                    target.connect(Lobbysystem.getRandomLobby());
+                    target.connect(nsv);
                 }
                 pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.teleport.sucess")
                 .replaceAll("%player%" , target.getName())
-                .replaceAll("%server%",target.getServer().getInfo().getName()));
+                .replaceAll("%server%", nsv.getName()));
                 target.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.teleport.player"));
 
                 return;
