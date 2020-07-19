@@ -11,7 +11,7 @@ Puedes compilarlo desde la linea de comando usando:
  mvn clean install
  ```
  Despues de compilar el plugin, agregalo a la carpeta /plugins de tu servidor bungee
-o descargar la ultima version del .jar haciendo click en [descargar](https://github.com/ObedMz/LobbySystem/releases/download/2.0-SNAPSHOT/lobbysystem-2.0-SNAPSHOT.jar)
+o descargar la ultima version del .jar haciendo click en [descargar](https://github.com/ObedMz/LobbySystem/releases/download/2.1-SNAPSHOT/lobbysystem-2.1-SNAPSHOT.jar)
 
 ### Permissions
  - "lobby.create"
