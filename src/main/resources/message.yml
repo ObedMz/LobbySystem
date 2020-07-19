@@ -24,3 +24,12 @@ message:
       header: "&6&m==================="
       message: "&6%lobby%  - %amount% players"
       footer: "&6====================="
+    server:
+      sucess: "&aHas ingresado a la lobby %server%"
+      error: "&cEse servidor no está establecido como lobby"
+      argument: "&cUsa /lobbyserver <server>"
+    teleport:
+      sucess: "&aEl jugador %player% ha sido transportado a la lobby: %server%"
+      player: "&aUn admin te ha transportado a la lobby."
+      error: "&cEl jugador no está conectado"
+      argument: "&cUsa /lobbytp <player>"
