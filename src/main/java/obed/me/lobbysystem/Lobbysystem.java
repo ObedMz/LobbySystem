@@ -10,6 +10,7 @@ import net.md_5.bungee.config.YamlConfiguration;
 import obed.me.lobbysystem.Command.*;
 import obed.me.lobbysystem.ConfigManager.ConfigManager;
 import obed.me.lobbysystem.Events.Event;
+import obed.me.lobbysystem.Objects.Type;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,7 +28,8 @@ public final class Lobbysystem extends Plugin {
     private boolean runnable;
     private static List<String> Globbys = new ArrayList<String>();
     private static List<String> Rlobbys = new ArrayList<String>();
-    private final Pattern pattern = Pattern.compile("#[a-fA-F0-9]{6}");
+    private Type mode;
+
     @Override
     public void onEnable() {
       instance = this;
@@ -40,6 +42,19 @@ public final class Lobbysystem extends Plugin {
         runnable = Boolean.parseBoolean(config.getConfig().getString("config.countdown"));
         time = Integer.parseInt(config.getConfig().getString("config.time"));
         loadCommands();
+        String modo = config.getConfig().getString("config.tp_mode");
+        switch (modo.toUpperCase()){
+            case "RANDOM":
+                setMode(Type.RANDOM);
+                break;
+            case "LESSPLAYERS":
+                setMode(Type.LESSPLAYERS);
+                break;
+            default:
+                getProxy().getConsole().sendMessage(ChatColor.RED + "An error has ocurred trying to set the mode in config.yml -> tp_mode. Check it!");
+                getProxy().stop();
+        }
+
         getProxy().getPluginManager().registerListener(this, new Event());
         getProxy().getConsole().sendMessage(ChatColor.GREEN + "[Lobby System] loaded correctly.");
         getProxy().getConsole().sendMessage(ChatColor.GREEN + "[Lobby System] " + getLobbys().size()+ " lobbys has been added.");
@@ -112,6 +127,18 @@ public final class Lobbysystem extends Plugin {
         loadDeniedServers();
         runnable = Boolean.parseBoolean(config.getConfig().getString("config.countdown"));
         time = Integer.parseInt(config.getConfig().getString("config.time"));
+        String modo = config.getConfig().getString("config.tp_mode");
+        switch (modo.toUpperCase()){
+            case "RANDOM":
+                setMode(Type.RANDOM);
+                break;
+            case "LESSPLAYERS":
+                setMode(Type.LESSPLAYERS);
+                break;
+            default:
+                getProxy().getConsole().sendMessage(ChatColor.RED + "An error has ocurred trying to set the mode in config.yml -> tp_mode. Check it!");
+                getProxy().stop();
+        }
     }
 
     public static ServerInfo getRandomLobby(){
@@ -153,16 +180,7 @@ public final class Lobbysystem extends Plugin {
 
     }
     public String getMessage(String path){
-        String message = config.getMessage().getString("message.prefix") + config.getMessage().getString(path);
-        if(getProxy().getVersion().contains("1.16")){
-            Matcher match = pattern.matcher(message);
-            while(match.find()){
-                String color = message.substring(match.start(), match.end());
-                message = message.replace(color, ChatColor.of(color) + "");
-                match = pattern.matcher(message);
-            }
-        }
-       return ChatColor.translateAlternateColorCodes('&', message);
+       return config.getMessage().getString("message.prefix") + config.getMessage().getString(path);
     }
 
     private void loadDirectory() {
@@ -182,5 +200,13 @@ public final class Lobbysystem extends Plugin {
 
     public void setRunnable(boolean runnable) {
         this.runnable = runnable;
+    }
+
+    public Type getMode() {
+        return mode;
+    }
+
+    public void setMode(Type mode) {
+        this.mode = mode;
     }
 }
