@@ -17,7 +17,7 @@ public class LobbyTP extends Command {
             ProxiedPlayer pp = (ProxiedPlayer) sender;
             if (pp.hasPermission(this.getPermission())) {
                 if(args.length <=0){
-                    pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.teleport.argument"));
+                    pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.teleport.arguments"));
                     return;
                 }
                 ProxiedPlayer target = Lobbysystem.getInstance().getProxy().getPlayer(args[0]);

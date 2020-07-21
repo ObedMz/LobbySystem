@@ -17,8 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 public final class Lobbysystem extends Plugin {
     private ConfigurationProvider cp = ConfigurationProvider.getProvider(YamlConfiguration.class);
@@ -180,7 +179,7 @@ public final class Lobbysystem extends Plugin {
 
     }
     public String getMessage(String path){
-       return config.getMessage().getString("message.prefix") + config.getMessage().getString(path);
+       return ChatColor.translateAlternateColorCodes('&', config.getMessage().getString("message.prefix") + config.getMessage().getString(path));
     }
 
     private void loadDirectory() {
@@ -196,10 +195,6 @@ public final class Lobbysystem extends Plugin {
 
     public boolean isRunnable() {
         return runnable;
-    }
-
-    public void setRunnable(boolean runnable) {
-        this.runnable = runnable;
     }
 
     public Type getMode() {

@@ -27,9 +27,12 @@ message:
     server:
       sucess: "&aHas ingresado a la lobby %server%"
       error: "&cEse servidor no está establecido como lobby"
-      argument: "&cUsa /lobbyserver <server>"
+      arguments: "&cUsa /lobbyserver <server>"
     teleport:
       sucess: "&aEl jugador %player% ha sido transportado a la lobby: %server%"
       player: "&aUn admin te ha transportado a la lobby."
       error: "&cEl jugador no está conectado"
-      argument: "&cUsa /lobbytp <player>"
+      arguments: "&cUsa /lobbytp <player>"
+    mode:
+      argument: "&cUsa /lobbymode <mode>"
+      sucess: "&aEl modo de transporte ha cambiado a: %mode%"

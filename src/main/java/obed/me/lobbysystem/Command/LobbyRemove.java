@@ -16,7 +16,7 @@ public class LobbyRemove extends Command {
     public void execute(CommandSender sender, String[] args) {
         if(sender instanceof ProxiedPlayer){
             ProxiedPlayer pp = (ProxiedPlayer) sender;
-            if(!pp.hasPermission("lobby.remove")) {
+            if(!pp.hasPermission(this.getPermission())) {
                 pp.sendMessage(Lobbysystem.getInstance().getMessage("message.nopermission"));
                 return;
             }

@@ -17,7 +17,7 @@ public class LobbyServer extends Command {
             ProxiedPlayer pp = (ProxiedPlayer) sender;
             if (pp.hasPermission(this.getPermission())) {
                 if (args.length <= 0) {
-                    pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.server.argument"));
+                    pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.server.arguments"));
                     return;
                 }
                 ServerInfo sv = Lobbysystem.getInstance().getProxy().getServerInfo(args[0]);

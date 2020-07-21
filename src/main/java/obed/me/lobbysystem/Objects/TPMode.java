@@ -6,9 +6,6 @@ import obed.me.lobbysystem.LobbyPlayer;
 import obed.me.lobbysystem.Lobbysystem;
 
 import java.util.ArrayList;
-import java.util.Collections;
-
-import static java.util.Collections.*;
 
 public class TPMode {
     public static void tpRandomly(ProxiedPlayer pp) {
@@ -21,7 +18,6 @@ public class TPMode {
             pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.already"));
             return;
         }
-        if(pp.getServer().getInfo() != sv){
             if(!Lobbysystem.getInstance().isRunnable()){
                 pp.connect(sv);
                 pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.tp"));
@@ -37,9 +33,7 @@ public class TPMode {
             lbp.setWaiting(true);
             pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.waiting").replaceAll("%time%", Integer.toString(Lobbysystem.getInstance().time)));
             lbp.transportWithRunnable(sv);
-            return;
-        }
-        pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.already"));
+
     }
 
     public static void tpLessPlayers(ProxiedPlayer pp) {
@@ -52,16 +46,12 @@ public class TPMode {
             lobbylist.add(Lobbysystem.getInstance().getProxy().getServerInfo(sv));
         }
         lobbylist.sort(new ShortUtil());
-        for(ServerInfo sv : lobbylist){
-            pp.sendMessage(sv.getName() + "===" + Integer.toString(sv.getPlayers().size()));
-        }
         /// getting the server
         ServerInfo sv = lobbylist.get(0);
         if(sv == null) {
             pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.error"));
             return;
         }
-        if(pp.getServer().getInfo() != sv){
             if(!Lobbysystem.getInstance().isRunnable()){
                 pp.connect(sv);
                 pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.tp"));
@@ -77,9 +67,7 @@ public class TPMode {
             lbp.setWaiting(true);
             pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.waiting").replaceAll("%time%", Integer.toString(Lobbysystem.getInstance().time)));
             lbp.transportWithRunnable(sv);
-            return;
-        }
-        pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.already"));
+
 
 
     }
