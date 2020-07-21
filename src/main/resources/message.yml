@@ -34,5 +34,5 @@ message:
       error: "&cEl jugador no está conectado"
       arguments: "&cUsa /lobbytp <player>"
     mode:
-      argument: "&cUsa /lobbymode <mode>"
+      arguments: "&cUsa /lobbymode <mode>"
       sucess: "&aEl modo de transporte ha cambiado a: %mode%"
