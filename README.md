@@ -20,6 +20,7 @@ o descargar la ultima version del .jar haciendo click en [descargar](https://git
  - "lobby.list"
  - "lobby.transport"
  - "lobby.use" (editable)
+ - "lobby.mode" 
  
  ### Comandos
  - /lobbycreate
@@ -27,5 +28,8 @@ o descargar la ultima version del .jar haciendo click en [descargar](https://git
  - /lobby (editable)
  - /lobbylist
  - /lobbytransport <target> <objetive>
+ - /lobbymode <mode>
+ - /lobbytp <player>
+ - /lobbyserver <server>
  
 Ver la [wiki](https://github.com/ObedMz/LobbySystem/wiki) para más información.
