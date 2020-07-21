@@ -170,7 +170,7 @@ public final class Lobbysystem extends Plugin {
             ProxyServer.getInstance().getPluginManager().registerCommand(this, new LobbyRemove("lobbyremove", "lobby.remove"));
             ProxyServer.getInstance().getPluginManager().registerCommand(this, new LobbyServer("lobbyserver", "lobby.server"));
             ProxyServer.getInstance().getPluginManager().registerCommand(this, new LobbyTP("lobbytp", "lobby.tp"));
-            ProxyServer.getInstance().getPluginManager().registerCommand(this, new LobbyTP("lobbymode", "lobby.mode"));
+            ProxyServer.getInstance().getPluginManager().registerCommand(this, new LobbyMode("lobbymode", "lobby.mode"));
 
         }catch (Exception e){
             e.printStackTrace();
