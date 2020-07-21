@@ -10,6 +10,8 @@ import net.md_5.bungee.event.EventHandler;
 import obed.me.lobbysystem.ConfigManager.ConfigManager;
 import obed.me.lobbysystem.LobbyPlayer;
 import obed.me.lobbysystem.Lobbysystem;
+import obed.me.lobbysystem.Objects.TPMode;
+import obed.me.lobbysystem.Objects.Type;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
@@ -39,32 +41,11 @@ public class Event implements Listener {
                         pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.denied"));
                         return;
                     }
-
-                    ServerInfo sv = Lobbysystem.getRandomLobby();
-                    if(sv == null) {
-                        pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.error"));
-                        return;
+                    if(Lobbysystem.getInstance().getMode() == Type.RANDOM) {
+                        TPMode.tpRandomly(pp);
+                    }else {
+                        TPMode.tpLessPlayers(pp);
                     }
-                    if(pp.getServer().getInfo() != sv){
-                        if(!Lobbysystem.getInstance().isRunnable()){
-                            pp.connect(sv);
-                            pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.tp"));
-                            return;
-                        }
-                        LobbyPlayer lbp = LobbyPlayer.getLobbyPlayer(pp);
-                        if(lbp.isWaiting()){
-                            pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.cancel"));
-                            lbp.setWaiting(false);
-                            lbp.getTask().cancel();
-                            return;
-                        }
-                        lbp.setWaiting(true);
-                        pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.waiting").replaceAll("%time%", Integer.toString(Lobbysystem.getInstance().time)));
-                        lbp.transportWithRunnable(sv);
-                        return;
-                    }
-                    pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.already"));
-
 
                 }
             }
