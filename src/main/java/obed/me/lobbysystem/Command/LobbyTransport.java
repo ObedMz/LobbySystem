@@ -7,15 +7,15 @@ import net.md_5.bungee.api.plugin.Command;
 import obed.me.lobbysystem.Lobbysystem;
 
 public class LobbyTransport extends Command {
-    public LobbyTransport(String name, String permission) {
-        super(name , permission , "lobbytransport");
+    public LobbyTransport(String name) {
+        super(name);
     }
 
     @Override
     public void execute(CommandSender sender, String[] args) {
         if(sender instanceof ProxiedPlayer){
             ProxiedPlayer pp = (ProxiedPlayer) sender;
-            if(pp.hasPermission(this.getPermission())){
+            if(pp.hasPermission("lobby.transport")|| pp.hasPermission("lobby.*")){
                 if(args.length <=1){
                     pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.transport.arguments"));
                     return;

@@ -8,15 +8,15 @@ import net.md_5.bungee.api.plugin.Command;
 import obed.me.lobbysystem.Lobbysystem;
 
 public class LobbyRemove extends Command {
-    public LobbyRemove(String name, String permission) {
-        super(name, permission, "lobbyremove");
+    public LobbyRemove(String name) {
+        super(name);
     }
 
     @Override
     public void execute(CommandSender sender, String[] args) {
         if(sender instanceof ProxiedPlayer){
             ProxiedPlayer pp = (ProxiedPlayer) sender;
-            if(!pp.hasPermission(this.getPermission())) {
+            if(!pp.hasPermission("lobby.remove")||pp.hasPermission("lobby.*")) {
                 pp.sendMessage(Lobbysystem.getInstance().getMessage("message.nopermission"));
                 return;
             }

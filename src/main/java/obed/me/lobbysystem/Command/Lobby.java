@@ -1,10 +1,8 @@
 package obed.me.lobbysystem.Command;
 
 import net.md_5.bungee.api.CommandSender;
-import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
-import obed.me.lobbysystem.LobbyPlayer;
 import obed.me.lobbysystem.Lobbysystem;
 import obed.me.lobbysystem.Objects.TPMode;
 import obed.me.lobbysystem.Objects.Type;

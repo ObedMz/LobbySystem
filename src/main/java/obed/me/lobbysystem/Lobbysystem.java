@@ -163,14 +163,14 @@ public final class Lobbysystem extends Plugin {
             String permission = config.getConfig().getString("config.commands.lobby.permission");
             String[] aliases = config.getConfig().getStringList("config.commands.lobby.aliases").toArray(new String[0]);
             ProxyServer.getInstance().getPluginManager().registerCommand(this, new Lobby(name,permission, aliases));
-            ProxyServer.getInstance().getPluginManager().registerCommand(this, new LobbyCreate("lobbycreate", "lobby.create"));
-            ProxyServer.getInstance().getPluginManager().registerCommand(this, new LobbyList("lobbylist", "lobby.list"));
-            ProxyServer.getInstance().getPluginManager().registerCommand(this, new LobbyTransport("lobbytransport", "lobby.transport"));
-            ProxyServer.getInstance().getPluginManager().registerCommand(this, new LobbyReload("lobbyreload", "lobby.reload"));
-            ProxyServer.getInstance().getPluginManager().registerCommand(this, new LobbyRemove("lobbyremove", "lobby.remove"));
-            ProxyServer.getInstance().getPluginManager().registerCommand(this, new LobbyServer("lobbyserver", "lobby.server"));
-            ProxyServer.getInstance().getPluginManager().registerCommand(this, new LobbyTP("lobbytp", "lobby.tp"));
-            ProxyServer.getInstance().getPluginManager().registerCommand(this, new LobbyMode("lobbymode", "lobby.mode"));
+            ProxyServer.getInstance().getPluginManager().registerCommand(this, new LobbyCreate("lobbycreate"));
+            ProxyServer.getInstance().getPluginManager().registerCommand(this, new LobbyList("lobbylist"));
+            ProxyServer.getInstance().getPluginManager().registerCommand(this, new LobbyTransport("lobbytransport"));
+            ProxyServer.getInstance().getPluginManager().registerCommand(this, new LobbyReload("lobbyreload"));
+            ProxyServer.getInstance().getPluginManager().registerCommand(this, new LobbyRemove("lobbyremove"));
+            ProxyServer.getInstance().getPluginManager().registerCommand(this, new LobbyServer("lobbyserver"));
+            ProxyServer.getInstance().getPluginManager().registerCommand(this, new LobbyTP("lobbytp"));
+            ProxyServer.getInstance().getPluginManager().registerCommand(this, new LobbyMode("lobbymode"));
 
         }catch (Exception e){
             e.printStackTrace();
