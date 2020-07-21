@@ -37,6 +37,10 @@ public class TPMode {
     }
 
     public static void tpLessPlayers(ProxiedPlayer pp) {
+        if(Lobbysystem.getInstance().getLobbys().size() <=0) {
+            pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.error"));
+            return;
+        }
         if(Lobbysystem.getInstance().getLobbys().contains(pp.getServer().getInfo().getName())){
             pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.already"));
             return;
