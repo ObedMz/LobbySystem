@@ -5,7 +5,7 @@ config:
   countdown: "true"
   time: "3"
   ## tp_mode:
-  #You can set the tp_mode between: "random" , "lessplayers" , "fullfilled"
+  #You can set the tp_mode between: "random" , "lessplayers"
   #random: Players will be teleported randomly to any lobby.
   #lessplayers: Players will be teleported to the lobby with less players on the server.
   tp_mode: "lessplayers"
