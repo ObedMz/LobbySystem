@@ -14,6 +14,8 @@ public class LobbyPlayer {
     private ScheduledTask task;
     public static HashMap<ProxiedPlayer, LobbyPlayer> lobbyPlayer = new HashMap<ProxiedPlayer, LobbyPlayer>();
     private Integer time = 0;
+    private boolean sendCommand = false;
+    private Long timecommand;
     public LobbyPlayer(ProxiedPlayer pp) {
         this.pp = pp;
         lobbyPlayer.put(pp, this);
@@ -41,6 +43,7 @@ public class LobbyPlayer {
                     pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.tp"));
                     time = 0;
                     task.cancel();
+                    sendCommand = false;
                 }
                 time++;
             }
@@ -54,5 +57,21 @@ public class LobbyPlayer {
 
     public void setWaiting(boolean waiting) {
         this.waiting = waiting;
+    }
+
+    public boolean isSendCommand() {
+        return sendCommand;
+    }
+
+    public void setSendCommand(boolean sendCommand) {
+        this.sendCommand = sendCommand;
+    }
+
+    public Long getTimecommand() {
+        return timecommand;
+    }
+
+    public void setTimecommand(Long timecommand) {
+        this.timecommand = timecommand;
     }
 }

@@ -25,9 +25,14 @@ public final class Lobbysystem extends Plugin {
     private static Lobbysystem instance;
     public int time;
     private boolean runnable;
+    private boolean delay;
+    private Long timetowait;
+    private int seconds;
     private static List<String> Globbys = new ArrayList<String>();
     private static List<String> Rlobbys = new ArrayList<String>();
     private Type mode;
+
+
 
     @Override
     public void onEnable() {
@@ -40,6 +45,10 @@ public final class Lobbysystem extends Plugin {
         loadLobbysfromConfig();
         runnable = Boolean.parseBoolean(config.getConfig().getString("config.countdown"));
         time = Integer.parseInt(config.getConfig().getString("config.time"));
+        delay = Boolean.parseBoolean(config.getConfig().getString("config.command_delay"));
+        seconds = Integer.parseInt(config.getConfig().getString("config.delay_time"));
+        timetowait = Long.valueOf(seconds+"000");
+
         loadCommands();
         String modo = config.getConfig().getString("config.tp_mode");
         switch (modo.toUpperCase()){
@@ -126,6 +135,9 @@ public final class Lobbysystem extends Plugin {
         loadDeniedServers();
         runnable = Boolean.parseBoolean(config.getConfig().getString("config.countdown"));
         time = Integer.parseInt(config.getConfig().getString("config.time"));
+        delay = Boolean.parseBoolean(config.getConfig().getString("config.command_delay"));
+        seconds = Integer.parseInt(config.getConfig().getString("config.delay_time"));
+        timetowait = Long.valueOf(seconds+"000");
         String modo = config.getConfig().getString("config.tp_mode");
         switch (modo.toUpperCase()){
             case "RANDOM":
@@ -204,5 +216,16 @@ public final class Lobbysystem extends Plugin {
 
     public void setMode(Type mode) {
         this.mode = mode;
+    }
+
+    public Long getTimetowait() {
+        return timetowait;
+    }
+
+    public boolean isDelay() {
+        return delay;
+    }
+    public int getseconds(){
+        return seconds;
     }
 }

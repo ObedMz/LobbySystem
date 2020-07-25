@@ -18,12 +18,24 @@ public class TPMode {
             pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.already"));
             return;
         }
+        LobbyPlayer lbp = LobbyPlayer.getLobbyPlayer(pp);
             if(!Lobbysystem.getInstance().isRunnable()){
+                if((Lobbysystem.getInstance().isDelay() && lbp.isSendCommand()) && (System.currentTimeMillis() - lbp.getTimecommand() <= Lobbysystem.getInstance().getTimetowait())){
+                  pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.delay.message").replaceAll("%seconds%", Integer.toString(Lobbysystem.getInstance().getseconds())));
+                  return;
+                }
+                lbp.setTimecommand(System.currentTimeMillis());
+                lbp.setSendCommand(true);
                 pp.connect(sv);
                 pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.tp"));
                 return;
             }
-            LobbyPlayer lbp = LobbyPlayer.getLobbyPlayer(pp);
+        if(Lobbysystem.getInstance().isDelay() && !lbp.isWaiting() && lbp.isSendCommand() && (System.currentTimeMillis() - lbp.getTimecommand() <= Lobbysystem.getInstance().getTimetowait())){
+            pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.delay.message").replaceAll("%seconds%", Integer.toString(Lobbysystem.getInstance().getseconds())));
+            return;
+        }
+        lbp.setTimecommand(System.currentTimeMillis());
+        lbp.setSendCommand(true);
             if(lbp.isWaiting()){
                 pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.cancel"));
                 lbp.setWaiting(false);
@@ -33,6 +45,8 @@ public class TPMode {
             lbp.setWaiting(true);
             pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.waiting").replaceAll("%time%", Integer.toString(Lobbysystem.getInstance().time)));
             lbp.transportWithRunnable(sv);
+
+
 
     }
 
@@ -56,12 +70,24 @@ public class TPMode {
             pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.error"));
             return;
         }
+        LobbyPlayer lbp = LobbyPlayer.getLobbyPlayer(pp);
             if(!Lobbysystem.getInstance().isRunnable()){
+                if((Lobbysystem.getInstance().isDelay() && lbp.isSendCommand()) && (System.currentTimeMillis() - lbp.getTimecommand() <= Lobbysystem.getInstance().getTimetowait())){
+                    pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.delay.message").replaceAll("%seconds%", Integer.toString(Lobbysystem.getInstance().getseconds())));
+                    return;
+                }
+                lbp.setTimecommand(System.currentTimeMillis());
+                lbp.setSendCommand(true);
                 pp.connect(sv);
                 pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.tp"));
                 return;
             }
-            LobbyPlayer lbp = LobbyPlayer.getLobbyPlayer(pp);
+             if(Lobbysystem.getInstance().isDelay() && !lbp.isWaiting() && lbp.isSendCommand() && (System.currentTimeMillis() - lbp.getTimecommand() <= Lobbysystem.getInstance().getTimetowait())){
+                 pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.delay.message").replaceAll("%seconds%", Integer.toString(Lobbysystem.getInstance().getseconds())));
+                 return;
+             }
+            lbp.setTimecommand(System.currentTimeMillis());
+            lbp.setSendCommand(true);
             if(lbp.isWaiting()){
                 pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.cancel"));
                 lbp.setWaiting(false);

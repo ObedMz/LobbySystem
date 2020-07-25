@@ -4,6 +4,8 @@
 config:
   countdown: "true"
   time: "3"
+  command_delay: "true"
+  delay_time: "3" #seconds
   ## tp_mode:
   #You can set the tp_mode between: "random" , "lessplayers"
   #random: Players will be teleported randomly to any lobby.
