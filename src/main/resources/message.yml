@@ -37,4 +37,4 @@ message:
       arguments: "&cUsa /lobbymode <mode>"
       sucess: "&aEl modo de transporte ha cambiado a: %mode%"
     delay:
-      message: "&cEspera %seconds% segundos para ejecutar este comando."
+      message: "&cEspera unos segundos para ejecutar este comando."

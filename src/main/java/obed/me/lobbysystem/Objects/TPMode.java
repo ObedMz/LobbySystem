@@ -21,8 +21,8 @@ public class TPMode {
         LobbyPlayer lbp = LobbyPlayer.getLobbyPlayer(pp);
             if(!Lobbysystem.getInstance().isRunnable()){
                 if((Lobbysystem.getInstance().isDelay() && lbp.isSendCommand()) && (System.currentTimeMillis() - lbp.getTimecommand() <= Lobbysystem.getInstance().getTimetowait())){
-                  pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.delay.message").replaceAll("%seconds%", Integer.toString(Lobbysystem.getInstance().getseconds())));
-                  return;
+                    pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.delay.message"));
+                    return;
                 }
                 lbp.setTimecommand(System.currentTimeMillis());
                 lbp.setSendCommand(true);
@@ -31,7 +31,7 @@ public class TPMode {
                 return;
             }
         if(Lobbysystem.getInstance().isDelay() && !lbp.isWaiting() && lbp.isSendCommand() && (System.currentTimeMillis() - lbp.getTimecommand() <= Lobbysystem.getInstance().getTimetowait())){
-            pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.delay.message").replaceAll("%seconds%", Integer.toString(Lobbysystem.getInstance().getseconds())));
+            pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.delay.message"));
             return;
         }
         lbp.setTimecommand(System.currentTimeMillis());
@@ -73,7 +73,7 @@ public class TPMode {
         LobbyPlayer lbp = LobbyPlayer.getLobbyPlayer(pp);
             if(!Lobbysystem.getInstance().isRunnable()){
                 if((Lobbysystem.getInstance().isDelay() && lbp.isSendCommand()) && (System.currentTimeMillis() - lbp.getTimecommand() <= Lobbysystem.getInstance().getTimetowait())){
-                    pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.delay.message").replaceAll("%seconds%", Integer.toString(Lobbysystem.getInstance().getseconds())));
+                    pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.delay.message"));
                     return;
                 }
                 lbp.setTimecommand(System.currentTimeMillis());
@@ -83,11 +83,11 @@ public class TPMode {
                 return;
             }
              if(Lobbysystem.getInstance().isDelay() && !lbp.isWaiting() && lbp.isSendCommand() && (System.currentTimeMillis() - lbp.getTimecommand() <= Lobbysystem.getInstance().getTimetowait())){
-                 pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.delay.message").replaceAll("%seconds%", Integer.toString(Lobbysystem.getInstance().getseconds())));
+                 pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.delay.message"));
                  return;
              }
-            lbp.setTimecommand(System.currentTimeMillis());
-            lbp.setSendCommand(true);
+        lbp.setTimecommand(System.currentTimeMillis());
+        lbp.setSendCommand(true);
             if(lbp.isWaiting()){
                 pp.sendMessage(Lobbysystem.getInstance().getMessage("message.lobby.cancel"));
                 lbp.setWaiting(false);
