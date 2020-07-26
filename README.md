@@ -1,3 +1,5 @@
+<img src="https://proxy.spigotmc.org/65e26f5120b1bfb3e2b79f0730e4902d406569ae?url=https%3A%2F%2Fi.ibb.co%2F94s6rH1%2Fbanner.png"></img>
+
 <h1> Lobby System </h1>
 LobbySystem es un plugin de la API de bungee creado para manejar el sistema de lobbys de tu network.
 
